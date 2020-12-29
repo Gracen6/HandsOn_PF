@@ -86,7 +86,7 @@ for i=1:nx
     end
 end
 fprintf('the numerical face thickness is %d \n', am1 * dx);
-fprintf('the analitical face thickness is %d \n\n', pi * sqrt(k / (2*u)));
+fprintf('the analytical face thickness is %d \n\n', pi * sqrt(k / (2*u)));
 
 
 ener = 0; % energy
@@ -95,4 +95,4 @@ for i = 1:nx
     ener = ener + term * dx;
 end
 fprintf('the numerical face energy is %d \n', ener);
-fprintf('the analitical face energy is %d \n', pi / (4*sqrt(2)) * sqrt(k*u));
+fprintf('the analytical face energy is %d \n', pi / (4*sqrt(2)) * sqrt(k*u));
