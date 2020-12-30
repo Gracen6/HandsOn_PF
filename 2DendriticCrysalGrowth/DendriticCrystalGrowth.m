@@ -55,16 +55,16 @@ for times=1:3000  %2000000
             end
             
             %gradient
-            grad_phi_x(i,j) = (phi(ip,j) - phi(im,j))/dx;
-            grad_phi_y(i,j) = (phi(i,jp) - phi(i,jm))/dy;
+            grad_phi_x(i,j) = (phi(ip,j) - phi(im,j))/2/dx;
+            grad_phi_y(i,j) = (phi(i,jp) - phi(i,jm))/2/dy;
             
             %laplacian
-            lap_phi(i,j) =(2.0*(phi(ip,j)+phi(im,j)+phi(i,jp) ...
+            lap_phi(i,j) =((phi(ip,j)+phi(im,j)+phi(i,jp) ...
                 + phi(i,jm)) + phi(ip,jp)+phi(im,jm)+phi(im,jp)...
-                + phi(ip,jm) - 12.0*phi(i,j))/(3.0*dx*dx);
-            lap_t(i,j) = (2.0*(t(ip,j)+t(im,j)+t(i,jp)+t(i,jm))...
+                + phi(ip,jm) - 8.0*phi(i,j))/(3.0*dx*dx);
+            lap_t(i,j) = ((t(ip,j)+t(im,j)+t(i,jp)+t(i,jm))...
                 + t(ip,jp)+t(im,jm)+t(im,jp)+t(ip,jm)...
-                - 12.0*t(i,j))/(3.0*dx*dx);
+                - 8.0*t(i,j))/(3.0*dx*dx);
             if (grad_phi_x(i,j)==0)
                 if (grad_phi_y(i,j)<0 )
                     angl(i,j) =-0.5*pi;
@@ -122,7 +122,7 @@ for times=1:3000  %2000000
             tnew(i,j) = t(i,j) + lap_t(i,j)*dt + LH*(phinew(i,j) - phiold);
             phi(i,j)=phinew(i,j);
             tem=phi(i,j);
-            phi1(i,j)=tem^2/( tem^2+(1-tem)^2 ); %visualize phi
+            phi1(i,j)=tem; %visualize phi
             t(i,j)=tnew(i,j);
         end
     end
